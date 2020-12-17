@@ -9,6 +9,24 @@ W='\033[1;37m'
 # TrapControl
 trap 'printf "\n";stop;exit 1' 2
 
+# Ensure system knows where blackeye directory was installed.
+if [[ ! -f '~/.local/.be_dir' ]]; then
+  LDIR=$(pwd)
+  echo ${LDIR} > ~/.local/.be_dir
+fi
+
+# When launched if CLI is not in Blackeye directory it will change to where user has installed it.
+WDIR=$(cat ~/.local/.be_dir)
+cd ${WDIR}
+
+# Adds Blackeye to Path
+if [[ ! -f '/usr/sbin/blackeye' ]]; then
+  sudo cp blackeye.sh /usr/sbin/blackeye
+  sudo chmod +x /usr/sbin/blackeye
+  sudo chown $USER:$USER /usr/sbin/blackeye
+fi
+## Blackeye can now be started from anywhere by running 'blackeye'
+
 # Dependancy Check
 dependencies() {
   command -v php > /dev/null 2>&1 || { echo >&2 "I require php but it's not installed. Install it. Aborting."; exit 1; }
