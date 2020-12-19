@@ -15,7 +15,7 @@ Usage of BlackEye for attacking targets without prior mutual consent is illegal.
 
 ### Usage:
 ```
-git clone https://github.com/j-dogcoder/Blackeye-2.0.git
+git clone https://github.com/Blackeye2/blackeye.git
 cd blackeye
 bash blackeye.sh
 ```
