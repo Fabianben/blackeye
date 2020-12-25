@@ -10,21 +10,30 @@ W='\033[1;37m'
 trap 'printf "\n";stop;exit 1' 2
 
 
-# Ensure system knows where blackeye directory was installed.
-if [[ ! -f '~/.local/.be_dir' ]]; then
-  LDIR=$(pwd)
-  echo ${LDIR} > ~/.local/.be_dir
+# Setting permanent directory placement
+if [[ ! -d '/opt/blackeye' ]]; then
+	echo -e "[ ! ] Blackeye is not installed in the right place\nEnsuring first time configuration is done."
+  	DCHK=$(pwd)
+  	if [[ ${DCHK} == */blackeye ]]; then
+    		sudo mv ../blackeye -t /opt
+    		sudo chown $USER:$USER /opt/blackeye --recursive
+  	else
+    		if [[ ${DCHK} != */blackeye ]]; then
+      			cd /opt; sudo git clone https://github.com/Blackeye2/blackeye
+      			sudo chown $USER:$USER /opt/blackeye --recursive
+   		fi
+  	fi
+	echo -e "Configuration is done.\nPlease restart blackeye"
+	exit 0
 fi
-
-# When launched if CLI is not in Blackeye directory it will change to where user has installed it.
-WDIR=$(cat ~/.local/.be_dir)
-cd ${WDIR}
 
 # Adds Blackeye to Path
 if [[ ! -f '/usr/sbin/blackeye' ]]; then
-  sudo cp blackeye.sh /usr/sbin/blackeye
-  sudo chmod +x /usr/sbin/blackeye
-  sudo chown $USER:$USER /usr/sbin/blackeye
+  if [[ -f 'blackeye.sh' ]]; then
+    sudo cp blackeye.sh /usr/sbin/blackeye
+    sudo chmod +x /usr/sbin/blackeye
+    sudo chown $USER:$USER /usr/sbin/blackeye
+  fi
 fi
 ## Blackeye can now be started from anywhere by running 'blackeye'
 
