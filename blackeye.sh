@@ -307,9 +307,12 @@ stop(){
 ##############################################################
 
 banner(){
-  printf "     \e[101m\e[1;77m:: Disclaimer: Developers assume no liability and are not    ::\e[0m\n"
-  printf "     \e[101m\e[1;77m:: responsible for any misuse or damage caused by BlackEye.  ::\e[0m\n"
-  printf "     \e[101m\e[1;77m:: Only use for educational purporses!!                      ::\e[0m\n"
+  printf "     \e[101m\e[1;77m:: Disclaimer: Phishing is illegal. Usage of BlackEye for attacking targets    ::\e[0m\n"
+  printf "     \e[101m\e[1;77m:: without prior mutual written consent is illegal and punishable by federal ::\e[0m\n"
+  printf "     \e[101m\e[1;77m:: law. It's the end user's responsibility to obey all applicable local, state ::\e[0m\n"
+  printf "     \e[101m\e[1;77m:: and federal laws. Developers assume no liability and are not responsible ::\e[0m\n"
+  printf "     \e[101m\e[1;77m::  for any misuse or damage caused by this program. This tool was created  ::\e[0m\n"
+  printf "     \e[101m\e[1;77m:: and should be used only for educational purposes.::\e[0m\n"
   printf "\n"
   printf "     \e[101m\e[1;77m::     BLACKEYE v2.0! By @j-dogcoder    ::\e[0m\n"
   printf "\n"
