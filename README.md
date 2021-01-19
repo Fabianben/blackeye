@@ -16,9 +16,18 @@ Phishing is <strong>illegal</strong>. Usage of BlackEye for attacking targets wi
 It's the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program. This tool was created and should be used only for <strong>educational purposes</strong>.
 
 
-### Usage:
+### Linux Install:
 ```
 git clone https://github.com/Blackeye2/blackeye.git
+cd blackeye
+bash blackeye.sh
+```
+
+### Linux (On Windows) Install:
+```
+cd /opt
+sudo git clone https://github.com/Blackeye2/blackeye
+sudo chown $USER:$USER /opt/blackeye --recursive
 cd blackeye
 bash blackeye.sh
 ```
